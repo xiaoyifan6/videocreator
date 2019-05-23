@@ -36,4 +36,5 @@ dependencies {
 
 [Android 代码规范](https://github.com/Blankj/AndroidStandardDevelop)
 
+[jitpack制作android库文档](https://jitpack.io/docs/ANDROID/)
 
