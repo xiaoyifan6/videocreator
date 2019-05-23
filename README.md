@@ -2,7 +2,27 @@
 
 android 纯java实现图片合成视频
 
-用法：
+### 用法
+
+**Step 1.** Add it in your root build.gradle at the end of repositories:
+
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+
+**Step 2.** Add the dependency
+
+```
+dependencies {
+   implementation 'com.github.xiaoyifan6:videocreator:1.0.0'
+}
+```
 
 
 
