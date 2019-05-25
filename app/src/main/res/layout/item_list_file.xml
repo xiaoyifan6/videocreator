@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="4dp"
+        android:text=""
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/img_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkBox3"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        app:srcCompat="@drawable/ic_wenjian" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/img_file"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="../gg/g/g/"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="2项 | 2019/01/01 00:00:00"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_arrow_right_black" />
+
+</RelativeLayout>

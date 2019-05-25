@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/creator/creator.iml" filepath="$PROJECT_DIR$/creator/creator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/videocreator.iml" filepath="$PROJECT_DIR$/.idea/videocreator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videocreator.iml" filepath="$PROJECT_DIR$/videocreator.iml" />
     </modules>
   </component>
 </project>

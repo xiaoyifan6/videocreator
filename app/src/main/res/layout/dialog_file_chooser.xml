@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_dialog"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="选择文件"
+                android:textColor="#1c6c74" />
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_button"
+                android:src="@drawable/ic_close_black_24dp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_file"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            tools:listitem="@layout/item_list_file" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_select"
+                android:layout_width="60dp"
+                android:layout_height="32dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/bg_button2"
+                android:text="选择"
+                android:textColor="#4da2ab" />
+
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="60dp"
+                android:layout_height="32dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/bg_button2"
+                android:text="创建"
+                android:textColor="#4da2ab" />
+
+            <CheckBox
+                android:id="@+id/cb_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示隐藏文件"
+                android:textColor="#1c6c74" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
