@@ -1,19 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".MainActivity"
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_import"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="导入图片"
-        android:textColor="@color/black" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
+        <Button
+            android:id="@+id/btn_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导入图片"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_merge_gif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合成gif"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_merge_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合成视频"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除图片"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:minWidth="300dp"
+            android:minHeight="200dp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray1"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        tools:listitem="@layout/item_list_img" />
 </LinearLayout>

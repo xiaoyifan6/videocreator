@@ -213,6 +213,7 @@ public class FileChooserDialog extends DialogFragment implements OnClickListener
                 weakCheckBox = null;
             }
         } else {
+            selectIndex = -1;
             refreshData(mFileProvider.setFilter(!isChecked));
         }
     }

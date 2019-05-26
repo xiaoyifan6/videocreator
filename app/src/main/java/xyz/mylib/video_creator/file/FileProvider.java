@@ -114,7 +114,7 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
 //                    if (mType == TYPE_FILE && size == 0) continue;
                     info = size + "项 | " + dateFormat.format(new Date(file.lastModified()));
                     mFileDataList.add(getFileData(file, filenameFilter, info));
-                } else {
+                } else if (mType == TYPE_FILE) {
                     info = getSizeStr(file.length()) +
                             " | " +
                             dateFormat.format(new Date(file.lastModified()));

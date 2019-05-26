@@ -17,7 +17,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<CommonHolder> 
     private final DataSetObservable mDataSetObservable = new DataSetObservable();
     private CharSequence[] charSequences = new CharSequence[0];
 
-    public BaseAdapter(List<T> data){
+    public BaseAdapter(List<T> data) {
         this.data = data;
     }
 
@@ -62,7 +62,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<CommonHolder> 
     }
 
     @Override
-    public Object getItem(int position) {
+    public T getItem(int position) {
         return this.data.get(position);
     }
 
@@ -76,7 +76,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<CommonHolder> 
         return this.getItemCount() == 0;
     }
 
-    public void setAutofillOptions( CharSequence[] chars) {
+    public void setAutofillOptions(CharSequence[] chars) {
         charSequences = chars;
     }
 
