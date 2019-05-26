@@ -1,11 +1,13 @@
 package xyz.mylib.video_creator.file;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +60,7 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
     }
 
 
-    public List<FileData> setFilte(boolean filter) {
+    public List<FileData> setFilter(boolean filter) {
         this.mFilter = filter;
         setData();
         return mFileDataList;
@@ -74,7 +76,7 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
                 info);
     }
 
-    String getSizeStr(long size) {
+    private String getSizeStr(long size) {
         if (size >= 1024 * 1024 * 1024) {
             return String.format("%.2f G", (float) size / 1073741824L);
         } else if (size >= 1024 * 1024) {
@@ -85,22 +87,14 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
         return size + "B";
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void setData() {
         this.mFileDataList.clear();
-        FilenameFilter filter = (dir, name) -> name.startsWith(".");
-        File[] files = mFilter ? new File(curPath).listFiles(filter) : new File(curPath).listFiles();
-
-        if (isRoot() && mOldPath != null) {
-            File oldFile = new File(mOldPath);
-            if (oldFile.exists()) {
-                mFileDataList.add(new FileData(oldFile.getName(), true, oldFile.getParent(), false, "[上次打开目录]"));
-            }
-        } else {
-            mFileDataList.add(new FileData("../", true, new File(curPath).getParent(), false, "[返回上一级]"));
-        }
+        FilenameFilter filenameFilter = (dir, name) -> !name.startsWith(".");
+        File[] files = mFilter ? new File(curPath).listFiles(filenameFilter) : new File(curPath).listFiles();
 
         if (files != null) {
-            SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
             for (File file : files) {
                 boolean isDir = file.isDirectory();
@@ -108,25 +102,43 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
 
                 if (isDir) {
                     int size = 0;
-                    String[] names = mFilter ? file.list(filter) : file.list();
+                    String[] names = mFilter ? file.list(filenameFilter) : file.list();
                     if (names != null) {
                         size = names.length;
                     }
-                    info = new StringBuffer().append(size).append("项 | ").append(sformat.format(new Date(file.lastModified()))).toString();
+                    if (mType == TYPE_FILE && size == 0) continue;
+                    info = size + "项 | " + dateFormat.format(new Date(file.lastModified()));
+                    mFileDataList.add(getFileData(file, filenameFilter, info));
                 } else {
-                    info = new StringBuffer()
-                            .append(getSizeStr(file.length()))
-                            .append(" | ")
-                            .append(sformat.format(new Date(file.lastModified()))).toString();
+                    info = getSizeStr(file.length()) +
+                            " | " +
+                            dateFormat.format(new Date(file.lastModified()));
+                    mFileDataList.add(getFileData(file, filenameFilter, info));
                 }
 
-
-                mFileDataList.add(getFileData(file, filter, info));
             }
         }
+
+        Collections.sort(mFileDataList, (o1, o2) -> {
+            if (o1.isDir == o2.isDir) return o1.name.compareTo(o2.name);
+            return o2.isDir ? 1 : -1;
+        });
+
+        if (isRoot()) {
+            if (mOldPath != null && !mOldPath.equals(mRootPath)) {
+                File oldFile = new File(mOldPath);
+                if (oldFile.exists()) {
+                    mFileDataList.add(0, new FileData(oldFile.getName(), true, oldFile.getPath(), false, "[上次打开目录] " + oldFile.getPath()));
+                }
+            }
+        } else {
+            String realPath = new File(curPath).getParent();
+            mFileDataList.add(0, new FileData("../", true, realPath, false, "[返回上一级] " + realPath));
+        }
+
     }
 
-    private List<FileData> list() {
+    public List<FileData> list() {
         return mFileDataList;
     }
 
@@ -146,6 +158,7 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
         if (position >= 0 && position < mFileDataList.size() && mFileDataList.get(position).isDir) {
             curPath = mFileDataList.get(position).realPath;
         }
+        setData();
         return mFileDataList;
     }
 

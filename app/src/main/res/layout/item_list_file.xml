@@ -3,34 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:paddingStart="5dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="10dp">
 
-    <CheckBox
-        android:id="@+id/checkBox3"
+    <LinearLayout
+        android:id="@+id/ll_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="4dp"
-        android:text=""
-        android:visibility="visible" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="visible" />
 
-    <ImageView
-        android:id="@+id/img_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBox3"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="4dp"
-        app:srcCompat="@drawable/ic_wenjian" />
-
+        <ImageView
+            android:id="@+id/img_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="TODO"
+            app:srcCompat="@drawable/ic_wenjian" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/img_file"
         android:layout_centerVertical="true"
-        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/ll_start"
+        android:layout_marginStart="10dp"
         android:orientation="vertical">
 
         <TextView
