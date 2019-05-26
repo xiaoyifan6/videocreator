@@ -24,7 +24,16 @@ dependencies {
 }
 ```
 
+```java
+GIFExecuteAsyncTask.execute(provider, 16, handler, path);
+AvcExecuteAsyncTask.execute(provider, 16, handler, path);
+```
 
+其中provider是实现IProvider,是用来获取bitmap；handler用来获取和显示进度信息。path是需要保存的文件路径，包括文件名称
+
+参考项目例子
+
+![](documents/IMG_20190526_225258.jpg)
 
 ### 文档
 
