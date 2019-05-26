@@ -26,6 +26,7 @@ import java.util.List;
 import xyz.mylib.video_creator.R;
 import xyz.mylib.video_creator.adapter.CommonAdapter;
 import xyz.mylib.video_creator.adapter.CommonHolder;
+import xyz.mylib.video_creator.input.InputDialog;
 
 /**
  * <pre>
@@ -71,9 +72,9 @@ public class FileChooserDialog extends DialogFragment implements OnClickListener
         return sharedPreferences.getString("oldpath", null);
     }
 
-    private void saveOldPath(String oldpath) {
+    private void saveOldPath(String oldPath) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("creator", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("oldpath", oldpath).apply();
+        sharedPreferences.edit().putString("oldpath", oldPath).apply();
     }
 
     @Nullable
@@ -110,8 +111,10 @@ public class FileChooserDialog extends DialogFragment implements OnClickListener
         holder.setText(R.id.txt_path, data.name);
         holder.setItemOnClickListener(v -> {
             if (data.name.equals("../")) {
+                selectIndex = -1;
                 refreshData(mFileProvider.gotoParent());
             } else {
+                selectIndex = -1;
                 refreshData(mFileProvider.gotoChild(position));
             }
         });
@@ -159,6 +162,18 @@ public class FileChooserDialog extends DialogFragment implements OnClickListener
                 break;
             }
             case R.id.btn_create: {
+                new InputDialog().setTitle("新建目录").setOnGetContentListener((content) -> {
+                    File dir = new File(mFileProvider.getCurPath(), content);
+                    if (dir.exists()) {
+                        Toast.makeText(getContext(), "文件夹已存在!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (dir.mkdir()) {
+                            refreshData(mFileProvider.refresh());
+                        } else {
+                            Toast.makeText(getContext(), "创建失败!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).show(getFragmentManager());
                 break;
             }
             case R.id.btn_select: {

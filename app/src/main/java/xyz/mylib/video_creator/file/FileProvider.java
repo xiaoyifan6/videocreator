@@ -59,6 +59,11 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
         this.setData();
     }
 
+    public List<FileData> refresh() {
+        setData();
+        return mFileDataList;
+    }
+
 
     public List<FileData> setFilter(boolean filter) {
         this.mFilter = filter;
@@ -106,7 +111,7 @@ public final class FileProvider implements Iterable<FileProvider.FileData> {
                     if (names != null) {
                         size = names.length;
                     }
-                    if (mType == TYPE_FILE && size == 0) continue;
+//                    if (mType == TYPE_FILE && size == 0) continue;
                     info = size + "项 | " + dateFormat.format(new Date(file.lastModified()));
                     mFileDataList.add(getFileData(file, filenameFilter, info));
                 } else {
